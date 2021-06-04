@@ -11,7 +11,7 @@ spec:
       name: sistema-noticias
     spec:
       containers:
-        - name: portal-noticias-container
+        - name: sistema-noticias-container
           image: aluracursos/sistema-noticias:1
           ports:
             - containerPort: 80
@@ -19,10 +19,10 @@ spec:
             - configMapRef:
                 name: sistema-configmap
           volumeMounts:
-            - name:  imagens
-              mountPath:  /var/www/html/
-            - name:  sessao
-              mountPath:  /tmp
+            - name: imagens
+              mountPath: /var/www/html/uploads
+            - name: sessao
+              mountPath: /tmp
       volumes:
         - name: imagens
           persistentVolumeClaim:
@@ -30,10 +30,7 @@ spec:
         - name: sessao
           persistentVolumeClaim:
             claimName: sessao-pvc
-            
   selector:
     matchLabels:
       app: sistema-noticias
   serviceName: svc-sistema-noticias
-
-    
